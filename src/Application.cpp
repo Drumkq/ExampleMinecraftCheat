@@ -32,11 +32,24 @@ void Application::Start()
 
 void Application::Update() 
 {
-    sdk->UpdateMappings();
-
     if (sdk->GetLocal())
     {
-        std::cout << sdk->GetPlayer()->Local_GetName() << std::endl;
-        std::cout << sdk->GetPlayer()->Local_GetPosition().x << " " << sdk->GetPlayer()->Local_GetPosition().y << " " << sdk->GetPlayer()->Local_GetPosition().z << std::endl;
+        sdk->UpdateMappings();
+        // std::cout << sdk->GetPlayer()->Local_GetName() << std::endl;
+        // std::cout << sdk->GetPlayer()->Local_GetPosition().x << " " << sdk->GetPlayer()->Local_GetPosition().y << " " << sdk->GetPlayer()->Local_GetPosition().z << std::endl;
+        std::cout << "Yaw: " << sdk->GetPlayer()->Local_GetYaw() << " | " << "Pitch: " << sdk->GetPlayer()->Local_GetPitch() << std::endl;
+        if (!sdk->GetPlayer()->Local_IsAlive())
+        {
+            sdk->GetPlayer()->Local_Respawn();
+        }
+        if (!sdk->GetPlayer()->Local_IsVelocityChanged() && !sdk->GetPlayer()->Local_IsSneaking())
+        {
+            sdk->GetPlayer()->Local_SetSprint(true);
+        }
+
+        if (sdk->IsPaused())
+        {
+            std::cout << "Loxf kdlasksaklfjkljflkads\n\n";
+        }
     }
 }

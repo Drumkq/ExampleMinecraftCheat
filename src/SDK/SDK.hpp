@@ -27,6 +27,13 @@ public:
 		return JavaNativeInterface::Get()->GetEnv()->GetObjectField(GetMinecraft(), player_field_id);
     }
 
+    jboolean IsPaused()
+    {
+        jmethodID mtd_id = JavaNativeInterface::Get()->GetEnv()->GetMethodID(JavaNativeInterface::Get()->GetEnv()->GetObjectClass(GetMinecraft()), "V", "()Z");
+
+        return JavaNativeInterface::Get()->GetEnv()->CallBooleanMethod(GetMinecraft(), mtd_id);
+    }
+
     /* =============================== */
 
     [[nodiscard]] auto GetPlayer()
